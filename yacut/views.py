@@ -42,7 +42,7 @@ def index_view():
     return render_template("content.html", form=form), HTTPStatus.OK
 
 
-@app.route("/<string:short>")
+@app.route("/<string:short>", methods=["GET"])
 def redirect_view(short):
     return (
         redirect(URLMap.query.filter_by(short=short).first_or_404().original),
