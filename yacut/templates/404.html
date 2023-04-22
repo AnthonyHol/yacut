@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}404. Если тут что-то было, теперь этого тут нет.{% endblock %}
+{% block content %}
+<main>
+    <div class="d-flex justify-content-center">
+        <h1 class="mb-5">Грусть-печаль, страница не нейдена.</h1>
+    </div>
+    <div class="d-flex justify-content-center">
+        <p>
+            <a href="{{ url_for('index_view') }}">Вернуться на главную</a>
+        </p>
+    </div>
+</main>
+{% endblock %}
