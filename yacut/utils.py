@@ -7,6 +7,7 @@ from .models import URLMap
 
 def get_short_id(original_url):
     """Функция получения короткой ссылки из случайных символов."""
+
     chars = string.ascii_uppercase + string.ascii_lowercase + string.digits
     custom_id = "".join(random.choice(chars) for _ in range(LEN_CUSTOM_ID))
 

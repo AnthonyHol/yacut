@@ -3,7 +3,7 @@ from re import fullmatch
 
 from flask import jsonify, request
 
-from . import app, db
+from . import app
 from .constants import (
     ID_NOT_FOUND,
     INVALID_NAME,
@@ -24,7 +24,7 @@ def create_short_url():
     if not data:
         raise InvalidAPIUsage(NO_DATA)
 
-    if 'url' not in data:
+    if "url" not in data:
         raise InvalidAPIUsage(NO_REQUIRED_FIELD)
 
     custom_url = data.get("custom_id")
@@ -43,9 +43,7 @@ def create_short_url():
         raise InvalidAPIUsage(message=f"Имя {custom_url} уже занято.")
 
     url = URLMap(original=original_url, short=custom_url)
-
-    db.session.add(url)
-    db.session.commit()
+    URLMap.add_object(url)
 
     return jsonify(url.to_dict()), HTTPStatus.CREATED
 
@@ -53,6 +51,7 @@ def create_short_url():
 @app.route("/api/id/<string:short>/", methods=["GET"])
 def get_original_url(short):
     """Функция получения оригинального URL по короткой версии."""
+
     url = URLMap.query.filter_by(short=short).first()
 
     if not url:

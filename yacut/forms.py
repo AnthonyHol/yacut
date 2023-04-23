@@ -6,6 +6,8 @@ from .constants import MAX_LEN, MAX_LEN_OUTPUT, REG_EXPRESSION, REG_OUTPUT
 
 
 class URLForm(FlaskForm):
+    """Форма для создания короткой ссылки."""
+
     original_link = URLField(
         "Длинная ссылка",
         validators=[

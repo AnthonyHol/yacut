@@ -1,4 +1,4 @@
-# validation
+# validation vars
 REG_EXPRESSION = rf"^[A-Za-z0-9]{{1,{16}}}$"
 LEN_CUSTOM_ID = 6
 MAX_LEN = 16

@@ -15,9 +15,18 @@ class URLMap(db.Model):
 
     def to_dict(self):
         """Метод преобразования объекта URLMap в словарь."""
+
         return dict(
             url=self.original,
             short_link=url_for(
                 "redirect_view", short=self.short, _external=True
             ),
         )
+
+    def add_object(self):
+        """Метод создания объекта URLMap."""
+
+        url = URLMap(original=self.original, short=self.short)
+
+        db.session.add(url)
+        db.session.commit()
