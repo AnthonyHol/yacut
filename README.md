@@ -19,17 +19,14 @@
 
 ```
 git clone 
-```
 
 ```
 cd yacut
-```
 
 2. Cоздать и активировать виртуальное окружение:
 
 ```
 python3 -m venv venv
-```
 
 * Если у вас Linux/macOS
 
