@@ -15,32 +15,25 @@ def index_view():
 
     form = URLForm()
 
-    if form.validate_on_submit():
-        custom_url = form.custom_id.data
-        original_url = form.original_link.data
+    if not form.validate_on_submit():
+        return render_template("content.html", form=form), HTTPStatus.OK
 
-        if URLMap.query.filter_by(original=original_url).first():
-            flash(f"Имя {custom_url} уже занято!")
-
-            return render_template("content.html", form=form)
-
-        if URLMap.query.filter_by(short=custom_url).first():
-            flash(f"Имя {custom_url} уже занято!")
-
-            return render_template("content.html", form=form)
-
-        if not custom_url:
-            custom_url = get_short_id(original_url)
-
-        url = URLMap(original=original_url, short=custom_url)
-        URLMap.add_object(url)
-
-        return (
-            render_template("content.html", form=form, short=custom_url),
-            HTTPStatus.OK,
-        )
-
-    return render_template("content.html", form=form), HTTPStatus.OK
+    custom_url = form.custom_id.data
+    original_url = form.original_link.data
+    if URLMap.query.filter_by(original=original_url).first():
+        flash(f"Имя {custom_url} уже занято!")
+        return render_template("content.html", form=form)
+    if URLMap.query.filter_by(short=custom_url).first():
+        flash(f"Имя {custom_url} уже занято!")
+        return render_template("content.html", form=form)
+    if not custom_url:
+        custom_url = get_short_id(original_url)
+    url = URLMap(original=original_url, short=custom_url)
+    URLMap.add_object(url)
+    return (
+        render_template("content.html", form=form, short=custom_url),
+        HTTPStatus.OK,
+    )
 
 
 @app.route("/<string:short>", methods=["GET"])
