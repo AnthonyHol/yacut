@@ -19,9 +19,6 @@
 
 ```
 git clone 
-```
-
-```
 cd yacut
 ```
 
